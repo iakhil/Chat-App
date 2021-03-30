@@ -10,12 +10,12 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <title>ChatCord App</title>
+    <title>MsgHub</title>
   </head>
   <body>
     <div class="chat-container">
       <header class="chat-header">
-        <h1><i class="fas fa-smile"></i> ChatCord</h1>
+        <h1><i class="fas fa-smile"></i> MsgHub</h1>
         <a id="leave-btn" class="btn">Leave Room</a>
       </header>
       <main class="chat-main">
@@ -28,7 +28,7 @@
         <div class="chat-messages"></div>
       </main>
       <div class="chat-form-container">
-        <form id="chat-form">
+        <form id="chat-form" action = "http://127.0.0.1:3000/myaction" method = "post">
           <input
             id="msg"
             type="text"

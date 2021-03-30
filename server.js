@@ -14,6 +14,7 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
+
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -27,7 +28,12 @@ io.on('connection', socket => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit('message', formatMessage(botName, 'Welcome to ChatCord!'));
+    nlp = require("compromise");
+//let doc = nlp(req.body.txt);
+let doc = nlp("I party all night.");
+doc.verbs().toPastTense().text()
+let trans = doc.text();
+    socket.emit('message', formatMessage(botName, 'Welcome!'));
 
     // Broadcast when a user connects
     socket.broadcast
@@ -69,6 +75,22 @@ io.on('connection', socket => {
     }
   });
 });
+
+
+app.post('/myaction', function(req, res) {
+  //  	nlp = require("compromise");
+  // let doc = nlp(req.body.txt);
+  // doc.verbs().toPastTense().text()
+  //console.log(trans);
+    //res.send(doc.text());
+      nlp = require("compromise");
+  let doc = nlp(req.body.txt);
+  doc.verbs().toPastTense().text()
+  let trans = doc.text();
+    socket.emit('message', formatMessage(botName, trans));
+      res.write("<h1>" + trans + "</h1>");
+  
+  })
 
 const PORT = process.env.PORT || 3000;
 
